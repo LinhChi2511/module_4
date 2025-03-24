@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Giao dịch nhà đất</title>
+
+</head>
+<body>
+<div class="container">
+
+    <div th:if="${message != null}" class="alert alert-success" role="alert" id="message" th:text="${message}"></div>
+
+    <form th:action="@{/transaction/create}" th:object="${transaction}"
+          method="post">
+        <div class="mb-3">
+            <label for="code" class="form-label">Mã giao dịch: </label>
+            <input type="text" class="form-control" id="code" name="code"
+                   th:field="*{code}" maxlength="50" required/>
+        </div>
+        <div class="mb-3">
+            <label for="listCus" class="form-label">Tên khách hàng: </label>
+            <select th:field="*{cus}" id="listCus" class="form-control">
+                <option th:value="null" selected>Chọn khách hàng</option>
+                <option th:each="cus : ${listCus}" th:value="${cus.id}" th:text="${cus.name}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="type" class="form-label">Loại bất động sản: </label>
+            <input type="text" class="form-control" id="type" name="type"
+                   th:field="*{type}" maxlength="50" required/>
+        </div>
+        <div class="mb-3">
+            <label for="created" class="form-label">Ngày giao dịch: </label>
+            <input type="date" class="form-control" id="created" name="created"
+                   th:field="*{created}" required/>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Đơn giá(VND): </label>
+            <input type="text" class="form-control" id="price" name="price"
+                   th:field="*{price}" maxlength="50" required/>
+        </div>
+        <
+        <div class="mb-3">
+            <label for="area" class="form-label">Diện tích(m2): </label>
+            <input type="text" class="form-control" id="area" name="area"
+                   th:field="*{area}" maxlength="50" required/>
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm mới</button>
+    </form>
+</div>
+</body>
+<script>
+    setTimeout(function () {
+        let message = document.getElementById("message");
+        if (message) {
+            message.remove();
+        }
+    }, 3000);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
